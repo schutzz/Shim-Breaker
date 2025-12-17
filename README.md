@@ -38,3 +38,26 @@ python shim_breaker.py C:\Evidence\SYSTEM --output result.csv
 
 # Run against a raw memory dump or unallocated space chunk
 python shim_breaker.py D:\dumps\memory.dmp -o evidence.csv
+### Arguments
+* `filepath` : Path to the target file (SYSTEM hive, raw binary, memory dump, etc.)
+* `-o`, `--output` : (Optional) Path to save the results in CSV format.
+
+## 📝 Output Format (CSV)
+
+| Offset | Size | ModifiedTime (UTC) | Path |
+| :--- | :--- | :--- | :--- |
+| 0x00A1B2 | 120 | 2024-11-20 12:34:56 | C:\Windows\System32\cmd.exe |
+| 0x00A2C0 | 48  | 2024-11-20 12:35:10 | C:\Users\Admin\Downloads\evil.exe |
+| ... | ... | ... | ... |
+
+## ⚠️ Limitations & Warnings
+
+* **Fragmentation**: Shim-Breaker reads the file linearly. If the ShimCache data is physically fragmented on the disk (non-contiguous clusters), the parsing stream will break, and subsequent entries might be lost.
+* **False Positives**: Although it has validation logic, parsing raw binary data may occasionally misinterpret random bytes as valid entries. **Always correlate with Prefetch or UserAssist.**
+
+## 📜 License
+
+MIT License - Use it, fork it, break it.
+
+---
+*Created by a barbarian forensic analyst.*
