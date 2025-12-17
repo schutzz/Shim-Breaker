@@ -1,0 +1,9 @@
+@"
+# Python garbage
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Output files
+*.csv
+"@ | Out-File -Encoding utf8 .gitignore
